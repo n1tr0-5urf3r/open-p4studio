@@ -1,0 +1,8 @@
+global-options: { build_model: true }
+features:
+  p4-examples:
+    - p4-14-programs
+    - p4-16-programs
+architectures:
+  - tofino
+  - tofino2
