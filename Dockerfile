@@ -12,7 +12,7 @@ WORKDIR /open-p4studio
 COPY . .
 
 # Apply the profile
-RUN ./p4studio/p4studio profile apply testing
+RUN ./p4studio/p4studio profile apply --jobs $(nproc) ./p4studio/profiles/testing.yaml
 
 # Set environment variables
 ENV SDE=/open-p4studio
