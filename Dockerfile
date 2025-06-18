@@ -2,6 +2,11 @@ FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 
+# Install deps
+RUN apt-get update && apt-get install -y \
+    git curl sudo python3 python3-pip build-essential ca-certificates libssl-dev \
+    && apt-get clean
+
 # Create workspace and copy code into container
 WORKDIR /open-p4studio
 COPY . .
