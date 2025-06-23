@@ -45,10 +45,3 @@ jobs:
         tags: ghcr.io/${{ github.repository }}:latest
         cache-from: type=gha
         cache-to: type=gha,mode=max
-
-    - name: Print ccache stats from container
-      run: |
-        docker create --name temp-container ghcr.io/${{ github.repository }}:latest
-        docker start temp-container
-        docker exec temp-container ccache -s || echo "ccache not found"
-        docker rm -f temp-container
