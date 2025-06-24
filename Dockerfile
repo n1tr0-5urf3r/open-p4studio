@@ -8,6 +8,19 @@ RUN apt-get update && apt-get install -y \
     ccache \
     && apt-get clean
 
+# Enable ccache for GCC/G++
+ENV CC="ccache gcc"
+ENV CXX="ccache g++"Add commentMore actions
+ENV CCACHE_BASEDIR=/open-p4studio
+ENV CCACHE_NOHASHDIR=true
+RUN echo "compiler_check=content" >> /etc/ccache.conf
+ENV CCACHE_DIR=/root/.ccache
+
+# Let CMake know to use ccache
+ENV CMAKE_GENERATOR="Unix Makefiles"
+ENV CMAKE_C_COMPILER_LAUNCHER=ccache
+ENV CMAKE_CXX_COMPILER_LAUNCHER=ccache
+
 # Create workspace
 WORKDIR /open-p4studio
 COPY . .
