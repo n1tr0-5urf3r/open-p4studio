@@ -12,7 +12,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /open-p4studio
 COPY . .
 
-RUN --mount=type=cache,target=/.ccache \
+RUN ccache --set-config cache_dir=.ccache
+RUN ccache --set-config max_size=2G
+
+RUN --mount=type=cache,target=.ccache \
     ./p4studio/p4studio profile apply --jobs $(nproc) ./p4studio/profiles/docker.yaml && \
     ccache -s
 
