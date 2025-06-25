@@ -26,12 +26,6 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v4
 
-    - name: Set up ccache
-      uses: hendrikmuhs/ccache-action@v1
-      with:
-        key: openp4studio-${{ runner.os }}
-        max-size: 2G
-
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v3
 
@@ -43,9 +37,11 @@ jobs:
         password: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Build and push Docker image
-      uses: docker/build-push-action@v5
+      uses: docker/build-push-action@v6
       with:
         context: .
         file: Dockerfile
         push: true
         tags: ghcr.io/${{ github.repository }}:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
