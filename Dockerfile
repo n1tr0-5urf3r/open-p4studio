@@ -11,7 +11,10 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /open-p4studio
 COPY . .
 
-RUN CMAKE_ARGS="-DKERNEL-MODULES=OFF" ./p4studio/p4studio profile apply --jobs $(nproc) ./p4studio/profiles/docker.yaml
+# force kernel modules OFF by patching CMakeLists
+RUN sed -i -E 's/option\(KERNEL-MODULES "[^"]*" ON\)/option(KERNEL-MODULES "Drivers: Build kernel modules" OFF)/' ./CMakeLists.txt
+
+RUN ./p4studio/p4studio profile apply --jobs $(nproc) ./p4studio/profiles/docker.yaml
 
 # Set environment variables
 ENV SDE=/open-p4studio

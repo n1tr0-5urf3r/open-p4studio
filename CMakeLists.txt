@@ -78,9 +78,6 @@ option(SWITCH        "Switch: Build switch-p4-16 package" OFF)
 option(SAI           "Switch: Build switch-p4-16 SAI implementation" ON)
 option(BF-DIAGS      "BF-Diags: Build bf-diags package" OFF)
 
-# TODO remove me
-message(STATUS "KERNEL-MODULES: ${KERNEL-MODULES}")
-
 # tools
 option(COVERAGE      "Build with gcov support" OFF)
 option(TCMALLOC      "Build with gperftools" ON)
