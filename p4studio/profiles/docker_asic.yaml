@@ -1,0 +1,14 @@
+global-options:  
+  asic: true  
+features:  
+  bf-platforms:  
+    newport: true  
+  drivers:  
+    p4rt: true  
+    bfrt: true  
+    bfrt-generic-flags: true  
+    grpc: true  
+    thrift-driver: true  
+    tdi: true  
+architectures:
+- tofino2
